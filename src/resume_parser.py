@@ -1,4 +1,8 @@
-from pdfminer.high_level import extract_text
+from PyPDF2 import PdfReader
 
-def extract_resume_text(pdf_path):
-    return extract_text(pdf_path)
+def extract_text_from_pdf(file_path):
+    reader = PdfReader(file_path)
+    text = ''
+    for page in reader.pages:
+        text += page.extract_text() + '\n'
+    return text

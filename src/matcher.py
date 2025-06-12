@@ -1,8 +1,8 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-def compute_match_score(resume_text, jd_text):
-    vectorizer = TfidfVectorizer()
-    tfidf_matrix = vectorizer.fit_transform([resume_text, jd_text])
-    score = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0] * 100
-    return score
+def match_resume_to_jd(resume_text, jd_text):
+    tfidf = TfidfVectorizer()
+    vectors = tfidf.fit_transform([jd_text, resume_text])
+    score = cosine_similarity(vectors[0:1], vectors[1:2])[0][0]
+    return score * 100
