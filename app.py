@@ -1,22 +1,45 @@
 import streamlit as st
-from src.resume_parser import extract_resume_text
+import os
+import tempfile
+import pandas as pd
+from src.matcher import match_resume_to_jd
+from src.resume_parser import extract_text_from_pdf
 from src.text_cleaner import preprocess
-from src.matcher import compute_match_score
 
-st.title("🔍 AI-Powered Resume Matcher")
+st.set_page_config(page_title="AI Resume Matcher", layout="centered")
 
-jd = st.text_area("Enter Job Description:")
-resume_file = st.file_uploader("Upload Resume (PDF)", type=["pdf"])
+st.title("📄 AI-Powered Resume Matcher")
+st.markdown("Enter a **Job Description** below and upload **multiple resumes** to match the best candidates.")
 
-if st.button("Match"):
-    if resume_file and jd:
-        with open("temp_resume.pdf", "wb") as f:
-            f.write(resume_file.read())
-        resume_text = extract_resume_text("temp_resume.pdf")
+#  JD Text Input
+jd_text = st.text_area("🧾 Enter Job Description", height=200, placeholder="Paste the job description here...")
+
+#  Upload Resumes
+resumes = st.file_uploader("📎 Upload Resumes (PDFs only)", type=["pdf"], accept_multiple_files=True)
+
+#  Trigger Matching
+if jd_text and resumes:
+    jd_clean = preprocess(jd_text)
+    scores = []
+
+    for resume in resumes:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
+            tmp.write(resume.read())
+            tmp_path = tmp.name
+
+        resume_text = extract_text_from_pdf(tmp_path)
         resume_clean = preprocess(resume_text)
-        jd_clean = preprocess(jd)
+        score = match_resume_to_jd(resume_clean, jd_clean)
 
-        score = compute_match_score(resume_clean, jd_clean)
-        st.success(f"\n\nMatch Score: {score:.2f}%")
-    else:
-        st.warning("Please upload a resume and enter job description.")
+        scores.append({
+            "Resume File": resume.name,
+            "Match Score (%)": round(score, 2)
+        })
+
+    sorted_scores = sorted(scores, key=lambda x: x["Match Score (%)"], reverse=True)
+
+    st.success("✅ Matching Completed")
+    st.dataframe(pd.DataFrame(sorted_scores))
+
+else:
+    st.info("Please provide a job description and upload at least one resume.")
