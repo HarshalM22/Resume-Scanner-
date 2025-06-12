@@ -57,19 +57,3 @@ It helps you:
 - PyPDF2 (PDF Parsing)
 - NLTK (Text Cleaning)
 
----
-
-## 📁 Folder Structure
-
-resume-scanner/
-├── app.py # Streamlit frontend
-├── resumes/ # Folder for uploaded resumes
-├── src/ # Core logic
-│ ├── matcher.py # Matching logic using TF-IDF + Cosine Similarity
-│ ├── resume_parser.py # Extract text from PDFs
-│ └── text_cleaner.py # Text preprocessing
-├── job_descriptions/ # (Optional) Sample JDs
-├── resume_matcher_demo.ipynb # Jupyter Notebook version
-└── README.md # Project overview and instructions
-
----
