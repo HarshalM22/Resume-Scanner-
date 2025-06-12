@@ -71,3 +71,5 @@ resume-scanner/
 ├── job_descriptions/ # (Optional) Sample JDs
 ├── resume_matcher_demo.ipynb # Jupyter Notebook version
 └── README.md # Project overview and instructions
+
+---
