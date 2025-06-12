@@ -1,0 +1,6 @@
+
+Job Description: Backend Developer
+
+We are seeking a Backend Developer with experience in Python frameworks like Django or Flask.
+You should be proficient in SQL databases, RESTful APIs, and cloud platforms such as AWS.
+Knowledge of Docker and DevOps pipelines is a plus.

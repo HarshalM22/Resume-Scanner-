@@ -1,0 +1,43 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# VS Code settings
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# PDFs and temp files
+resumes/*.pdf
+temp_*.pdf
+
+# Python environment files
+*.egg-info/
+*.egg
+*.env
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Test result logs or debug dumps
+*.out
+*.log
+*.bak
+
+# mypy, pylint, coverage reports
+.mypy_cache/
+.pytest_cache/
+.coverage
+
+# dotenv files
+.env
