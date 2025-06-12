@@ -61,12 +61,13 @@ It helps you:
 
 ## 📁 Folder Structure
 
+resume-scanner/
 ├── app.py # Streamlit frontend
-├── resumes/ # Upload folder for resumes
+├── resumes/ # Folder for uploaded resumes
 ├── src/ # Core logic
-│ ├── matcher.py
-│ ├── resume_parser.py
-│ └── text_cleaner.py
+│ ├── matcher.py # Matching logic using TF-IDF + Cosine Similarity
+│ ├── resume_parser.py # Extract text from PDFs
+│ └── text_cleaner.py # Text preprocessing
 ├── job_descriptions/ # (Optional) Sample JDs
-├── resume_matcher_demo.ipynb # Jupyter version
-└── README.md
+├── resume_matcher_demo.ipynb # Jupyter Notebook version
+└── README.md # Project overview and instructions
